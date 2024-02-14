@@ -1,0 +1,33 @@
+{
+  "name": "daniyal2959/sms",
+  "description": "Package for send Iran sms that work with any company",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Sedighpour",
+      "email": "daniyal.s.2959@gmail.com"
+    }
+  ],
+  "keywords": [
+    "sms",
+    "sms ir",
+    "ippanel",
+    "sms iran",
+    "iran sms",
+    "farazsms",
+    "kavenegar",
+    "ghasedak",
+    "iranian sms",
+    "sms service provider"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Sms\\": "src"
+    },
+    "files": []
+  },
+  "require": {
+    "ext-json": "*",
+    "ext-curl": "*"
+  }
+}
