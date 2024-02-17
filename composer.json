@@ -1,6 +1,6 @@
 {
   "name": "daniyal2959/sms",
-  "description": "Package for send Iran sms that work with any company",
+  "description": "Package for send sms from any persian service provider to numbers",
   "license": "MIT",
   "authors": [
     {
