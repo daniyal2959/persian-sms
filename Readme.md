@@ -9,7 +9,7 @@
 This is a PHP library for Sms Services Integration. This library supports `PHP 8.0+`.
 
 
-For PHP integration you can use [daniyal2959/persian-sms](https://github.com/jaby/sms) package.
+For PHP integration you can use [daniyal2959/persian-sms](https://github.com/daniyal2959/persian-sms) package.
 
 > This packages works with multiple drivers, and you can create custom drivers if you can't find them in the [current drivers list](#list-of-available-drivers) (below list).
 
