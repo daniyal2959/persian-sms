@@ -170,7 +170,7 @@ class MyDrive extends Driver implements IDriver
 
 ## Donate (if you like it ❤️)
 
-<a href="https://www.coffeebede.com/linohost"><img class="img-fluid" src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" /></a>
+<a href="https://www.coffeebede.com/daniyal_s"><img class="img-fluid" src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg" /></a>
 
 ## Security
 
