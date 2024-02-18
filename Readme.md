@@ -119,7 +119,7 @@ Sms::driver('ippanel')
 Sms::driver('ippanel')
     ->pattern('<PATTERN_NAME>')
     ->data([
-        'name' => 'daniel'
+        'name' => 'daniel',
         'code' => $code,
     ])
     ->to(['numbers'])
