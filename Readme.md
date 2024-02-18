@@ -62,14 +62,12 @@ available methods:
 - `send`: send your sms
 - `options`: set sms service provider settings e.g: `token`, `username`, `password`, `from`, `urlPattern` and 'urlNormal'
 
-#### Example for kavenegar service provider:
+#### Example for sending sms message from kavenegar service provider:
 ```php
-// 
 Sms::driver('kavenegar')
     ->text('Hello')
     ->to(['numbers'])
     ->options([
-        'token'      => '<SERVICE_PROVIDER_TOKEN>',
         'from'       => '<SERVICE_PROVIDER_NUMBER>',
         'urlNormal'  => '<SERVICE_PROVIDER_NORMAL_URL>', 
         'urlPattern' => '<SERVICE_PROVIDER_PATTERN_URL>', 
@@ -80,11 +78,50 @@ Sms::driver('kavenegar')
     ->send();
 ```
 
-#### Example for ippanel service provider:
+#### Example for sending sms pattern from kavenegar service provider:
+```php
+Sms::driver('kavenegar')
+    ->pattern('<PATTERN_NAME>')
+    ->data([
+        '%token' => '123456'
+    ])
+    ->to(['numbers'])
+    ->options([
+        'from'       => '<SERVICE_PROVIDER_NUMBER>',
+        'urlNormal'  => '<SERVICE_PROVIDER_NORMAL_URL>', 
+        'urlPattern' => '<SERVICE_PROVIDER_PATTERN_URL>', 
+    ])
+    ->credential([
+        'token'      => '<SERVICE_PROVIDER_TOKEN>'
+    ])
+    ->send();
+```
 
+#### Example for sending sms message from ippanel service provider:
 ```php
 Sms::driver('ippanel')
     ->text('Hello')
+    ->to(['numbers'])
+    ->options([
+        'from'       => '<SERVICE_PROVIDER_NUMBER>',
+        'urlNormal'  => '<SERVICE_PROVIDER_NORMAL_URL>', 
+        'urlPattern' => '<SERVICE_PROVIDER_PATTERN_URL>', 
+    ])
+    ->credential([
+        'username'   => '<SERVICE_PROVIDER_USERNAME>',
+        'password'   => '<SERVICE_PROVIDER_PASSWORD>',
+    ])
+    ->send();
+```
+
+#### Example for sending sms pattern from ippanel service provider:
+```php
+Sms::driver('ippanel')
+    ->pattern('<PATTERN_NAME>')
+    ->data([
+        'name' => 'daniel'
+        'code' => $code,
+    ])
     ->to(['numbers'])
     ->options([
         'from'       => '<SERVICE_PROVIDER_NUMBER>',
