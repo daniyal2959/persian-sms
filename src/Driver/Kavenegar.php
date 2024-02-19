@@ -12,16 +12,21 @@ class Kavenegar extends Driver implements IDriver
      */
     public function sendPattern()
     {
-        $url = $this->options['urlPattern'].'/'.$this->credentials['token'].'/verify/lookup.json';
-        $url .= '?receptor='.$this->numbers[0];
+        $patterns = [];
+        $url = $this->options['urlPattern'].'/'.$this->credentials['token'].'/verify/lookup.json?';
+
         foreach ($this->data as $patternKey => $patternValue ){
-            $url .= '&'.$patternKey.'='.$patternValue;
+            $patterns[$patternKey] = $patternValue;
         }
-        $url .= '&template='.$this->pattern_code;
+
+        $data = [
+            'receptor' => $this->numbers[0],
+            'template' => $this->pattern_code
+        ];
+        $data = array_merge($data, $patterns);
+        $url .= http_build_query($data);
 
         $handler = curl_init($url);
-        curl_setopt($handler, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
         return curl_exec($handler);
     }
 
@@ -31,14 +36,16 @@ class Kavenegar extends Driver implements IDriver
      */
     public function message($text)
     {
-        $url = $this->options['urlNormal'].'/'.$this->credentials['token'].'/sms/send.json';
-        $url .= '?receptor='.implode(",",$this->numbers);
-        $url .= '&sender='.$this->options['from'];
-        $url .= '&message='.$text;
+        $url = $this->options['urlNormal'].'/'.$this->credentials['token'].'/sms/send.json?';
+
+        $data = [
+            'receptor' => implode(",",$this->numbers),
+            'sender' => $this->options['from'],
+            'message' => $text
+        ];
+        $url .= http_build_query($data);
 
         $handler = curl_init($url);
-        curl_setopt($handler, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
         return curl_exec($handler);
     }
 }
