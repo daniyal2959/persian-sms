@@ -27,7 +27,9 @@ class Kavenegar extends Driver implements IDriver
         $url .= http_build_query($data);
 
         $handler = curl_init($url);
-        return curl_exec($handler);
+        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+        $responseString = curl_exec($handler);
+        return $this->response($responseString);
     }
 
     /**
@@ -46,6 +48,8 @@ class Kavenegar extends Driver implements IDriver
         $url .= http_build_query($data);
 
         $handler = curl_init($url);
-        return curl_exec($handler);
+        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+        $responseString = curl_exec($handler);
+        return $this->response($responseString);
     }
 }

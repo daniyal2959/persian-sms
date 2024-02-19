@@ -20,11 +20,15 @@ abstract class Driver
 
     protected $credentials;
 
+    protected $asJson;
+
     /**
      * @return bool|mixed|string
      */
-    public function send()
+    public function send($asJson = false)
     {
+        $this->asJson = $asJson;
+
         if ($this->method == 'pattern')
             $res = $this->sendPattern();
         else
@@ -111,5 +115,11 @@ abstract class Driver
         }
 
         return $this;
+    }
+
+    protected function response($values){
+        if( $this->asJson )
+            return json_decode($values);
+        return $values;
     }
 }
