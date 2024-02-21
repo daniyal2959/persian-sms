@@ -7,13 +7,17 @@ use Sms\Driver;
 
 class Kavenegar extends Driver implements IDriver
 {
+    const NORMAL_URL = 'https://api.kavenegar.com/v1';
+
+    const PATTERN_URL = 'https://api.kavenegar.com/v1';
+
     /**
      * @return bool|mixed|string
      */
     public function sendPattern()
     {
         $patterns = [];
-        $url = $this->options['urlPattern'].'/'.$this->credentials['token'].'/verify/lookup.json?';
+        $url = self::PATTERN_URL.'/'.$this->credentials['token'].'/verify/lookup.json?';
 
         foreach ($this->data as $patternKey => $patternValue ){
             $patterns[$patternKey] = $patternValue;
@@ -38,11 +42,11 @@ class Kavenegar extends Driver implements IDriver
      */
     public function message($text)
     {
-        $url = $this->options['urlNormal'].'/'.$this->credentials['token'].'/sms/send.json?';
+        $url = self::NORMAL_URL.'/'.$this->credentials['token'].'/sms/send.json?';
 
         $data = [
             'receptor' => implode(",",$this->numbers),
-            'sender' => $this->options['from'],
+            'sender' => $this->from,
             'message' => $text
         ];
         $url .= http_build_query($data);
