@@ -72,9 +72,9 @@ abstract class Driver
      * @param $from
      * @return $this
      */
-    public function from($from): Driver
+    public function from($number): Driver
     {
-        $this->from = $from;
+        $this->from = $number;
 
         return $this;
     }
