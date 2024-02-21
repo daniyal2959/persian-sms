@@ -52,85 +52,75 @@ There is not any config file in this package. so you can set settings for your s
 
 
 available methods:
-
 - `driver`: set the driver
 - `text`: set the message to send without pattern
 - `patten`: set your pattern code
 - `data`: set array of data  pattern
 - `to`: set array of numbers receivers
 - `from`: set sender number
-- `send`: send your sms
-- `options`: set sms service provider settings e.g: `token`, `username`, `password`, `from`, `urlPattern` and 'urlNormal'
+- `send`: send your sms and return response as json or plain string
+- `credential`: set sms service provider credentials e.g: `token`, `username`, `password` or somethings else.
+
+### Methods with Parameters
+
+| Method    | driver | text   | pattern       | data  | to       | from    | credential   | send    |
+|-----------|--------|--------|---------------|-------|----------|---------|--------------|---------|
+| Parameter | $key   | $text  | $pattern_code | $data | $numbers | $number | $credentials | $asJson |
+| Type      | string | string | string        | array | array    | string  | array        | boolean |
+| Required  | *      | *      |               |       | *        | *       | *            | *       |
 
 #### Example for sending sms message from kavenegar service provider:
 ```php
-Sms::driver('kavenegar')
-    ->text('Hello')
-    ->to(['numbers'])
-    ->options([
-        'from'       => '<SERVICE_PROVIDER_NUMBER>',
-        'urlNormal'  => '<SERVICE_PROVIDER_NORMAL_URL>', 
-        'urlPattern' => '<SERVICE_PROVIDER_PATTERN_URL>', 
-    ])
-    ->credential([
-        'token'      => '<SERVICE_PROVIDER_TOKEN>'
+$sms = new SMS();
+$response = $sms->driver('kavenegar')
+    ->text('<MESSAGE_TO_SEND>')
+    ->from('<SERVICE_PROVIDER_NUMBER>')
+    ->to('<ARRAY_OF_PHONE_NUMBERS>')
+    ->credential    ([
+        'token' => '<YOUR_API_KEY>'
     ])
     ->send();
 ```
 
 #### Example for sending sms pattern from kavenegar service provider:
 ```php
-Sms::driver('kavenegar')
-    ->pattern('<PATTERN_NAME>')
-    ->data([
-        '%token' => '123456'
-    ])
-    ->to(['numbers'])
-    ->options([
-        'from'       => '<SERVICE_PROVIDER_NUMBER>',
-        'urlNormal'  => '<SERVICE_PROVIDER_NORMAL_URL>', 
-        'urlPattern' => '<SERVICE_PROVIDER_PATTERN_URL>', 
-    ])
-    ->credential([
-        'token'      => '<SERVICE_PROVIDER_TOKEN>'
+$sms = new SMS();
+$response = $sms->driver('kavenegar')
+    ->pattern('<YOUR_PATTERN_NAME>')
+    ->data('<ARRAY_OF_PATTERN_VALUES>') #E.g:['%token' => '1234']
+    ->from('<SERVICE_PROVIDER_NUMBER>')
+    ->to('<ARRAY_OF_PHONE_NUMBERS>')
+    ->credential    ([
+        'token' => '<YOUR_API_KEY>'
     ])
     ->send();
 ```
 
 #### Example for sending sms message from ippanel service provider:
 ```php
-Sms::driver('ippanel')
-    ->text('Hello')
-    ->to(['numbers'])
-    ->options([
-        'from'       => '<SERVICE_PROVIDER_NUMBER>',
-        'urlNormal'  => '<SERVICE_PROVIDER_NORMAL_URL>', 
-        'urlPattern' => '<SERVICE_PROVIDER_PATTERN_URL>', 
-    ])
-    ->credential([
-        'username'   => '<SERVICE_PROVIDER_USERNAME>',
-        'password'   => '<SERVICE_PROVIDER_PASSWORD>',
+$sms = new SMS();
+$response = $sms->driver('ippanel')
+    ->text('<MESSAGE_TO_SEND>')
+    ->from('<SERVICE_PROVIDER_NUMBER>')
+    ->to('<ARRAY_OF_PHONE_NUMBERS>')
+    ->credential    ([
+        'username' => '<YOUR_USERNAME>',
+        'password' => '<YOUR_PASSWORD>'
     ])
     ->send();
 ```
 
 #### Example for sending sms pattern from ippanel service provider:
 ```php
-Sms::driver('ippanel')
-    ->pattern('<PATTERN_NAME>')
-    ->data([
-        'name' => 'daniel',
-        'code' => $code,
-    ])
-    ->to(['numbers'])
-    ->options([
-        'from'       => '<SERVICE_PROVIDER_NUMBER>',
-        'urlNormal'  => '<SERVICE_PROVIDER_NORMAL_URL>', 
-        'urlPattern' => '<SERVICE_PROVIDER_PATTERN_URL>', 
-    ])
-    ->credential([
-        'username'   => '<SERVICE_PROVIDER_USERNAME>',
-        'password'   => '<SERVICE_PROVIDER_PASSWORD>',
+$sms = new SMS();
+$response = $sms->driver('ippanel')
+    ->pattern('<YOUR_PATTERN_CODE>')
+    ->data('<ARRAY_OF_PATTERN_VALUES>')
+    ->from('<SERVICE_PROVIDER_NUMBER>')
+    ->to('<ARRAY_OF_PHONE_NUMBERS>')
+    ->credential    ([
+        'username' => '<YOUR_USERNAME>',
+        'password' => '<YOUR_PASSWORD>'
     ])
     ->send();
 ```
@@ -149,6 +139,10 @@ use Sms\Driver;
 
 class MyDrive extends Driver implements IDriver
 {
+    const NORMAL_URL = '';
+
+    const PATTERN_URL = '';
+    
     /**
      * @return bool|mixed|string
      */
