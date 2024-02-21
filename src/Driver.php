@@ -16,8 +16,6 @@ abstract class Driver
 
     protected $text;
 
-    protected $options;
-
     protected $credentials;
 
     protected $asJson;
@@ -92,27 +90,9 @@ abstract class Driver
         return $this;
     }
 
-    /**
-     * @param array $options
-     * @return $this
-     */
-    public function options(array $options): Driver
-    {
-        if( $this->options == [] )
-            $this->options = $options;
-        else
-            $this->options = array_merge($options, $this->options);
-
-        return $this;
-    }
-
     public function credential($credentials)
     {
         $this->credentials = $credentials;
-
-        foreach ($this->credentials as $key => $value) {
-            $this->options[$key] = $value;
-        }
 
         return $this;
     }
