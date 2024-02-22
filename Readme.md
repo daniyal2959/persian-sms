@@ -63,11 +63,11 @@ available methods:
 
 ### Methods with Parameters
 
-| Method    | driver | text   | pattern       | data  | to       | from    | credential   | send    |
-|-----------|--------|--------|---------------|-------|----------|---------|--------------|---------|
+| Method    | driver | text   | pattern       | data  | to       | from    | credential   | send   |
+|-----------|--------|--------|---------------|-------|----------|---------|--------------|--------|
 | Parameter | $key   | $text  | $pattern_code | $data | $numbers | $number | $credentials | $asJson |
 | Type      | string | string | string        | array | array    | string  | array        | boolean |
-| Required  | *      | *      |               |       | *        | *       | *            | *       |
+| Required  | *      | *      |               |       | *        | *       | *            |        |
 
 #### Example for sending sms message from kavenegar service provider:
 ```php
