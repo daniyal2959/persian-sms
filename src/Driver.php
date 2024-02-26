@@ -16,9 +16,9 @@ abstract class Driver
 
     protected $text;
 
-    protected $credentials;
-
     protected $asJson;
+
+    public $apiKey;
 
     /**
      * @return bool|mixed|string
@@ -86,13 +86,6 @@ abstract class Driver
     public function to(array $numbers): Driver
     {
         $this->numbers = $numbers;
-
-        return $this;
-    }
-
-    public function credential($credentials)
-    {
-        $this->credentials = $credentials;
 
         return $this;
     }

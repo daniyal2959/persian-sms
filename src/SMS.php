@@ -6,19 +6,26 @@ use Exception;
 
 class SMS
 {
-    protected $driver ;
+    protected string $driver ;
 
-    protected $class ;
+    protected Driver $class ;
+
+    public function __construct(
+        public string $apiKey
+    ){}
 
     /**
      * @param $key
-     * @return $this
+     * @return Driver
+     * @throws Exception
      */
     public function driver($key): Driver
     {
         $this->driver = $key ;
 
         $this->class = new ("Sms\\Driver\\" . ucfirst($this->driver));
+        $this->class->apiKey = $this->apiKey;
+        $this->class->setCredential();
 
         return $this->class;
     }
