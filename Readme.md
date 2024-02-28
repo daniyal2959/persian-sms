@@ -71,57 +71,47 @@ available methods:
 
 #### Example for sending sms message from kavenegar service provider:
 ```php
-$sms = new SMS();
+$apiKey = '<YOUR_API_KEY>';
+$sms = new SMS($apiKey);
 $response = $sms->driver('kavenegar')
     ->text('<MESSAGE_TO_SEND>')
     ->from('<SERVICE_PROVIDER_NUMBER>')
     ->to('<ARRAY_OF_PHONE_NUMBERS>')
-    ->credential    ([
-        'token' => '<YOUR_API_KEY>'
-    ])
     ->send();
 ```
 
 #### Example for sending sms pattern from kavenegar service provider:
 ```php
-$sms = new SMS();
+$apiKey = '<YOUR_API_KEY>';
+$sms = new SMS($apiKey);
 $response = $sms->driver('kavenegar')
     ->pattern('<YOUR_PATTERN_NAME>')
     ->data('<ARRAY_OF_PATTERN_VALUES>') #E.g:['%token' => '1234']
     ->from('<SERVICE_PROVIDER_NUMBER>')
     ->to('<ARRAY_OF_PHONE_NUMBERS>')
-    ->credential    ([
-        'token' => '<YOUR_API_KEY>'
-    ])
     ->send();
 ```
 
 #### Example for sending sms message from ippanel service provider:
 ```php
-$sms = new SMS();
+$apiKey = '<YOUR_API_KEY>';
+$sms = new SMS($apiKey);
 $response = $sms->driver('ippanel')
     ->text('<MESSAGE_TO_SEND>')
     ->from('<SERVICE_PROVIDER_NUMBER>')
     ->to('<ARRAY_OF_PHONE_NUMBERS>')
-    ->credential    ([
-        'username' => '<YOUR_USERNAME>',
-        'password' => '<YOUR_PASSWORD>'
-    ])
     ->send();
 ```
 
 #### Example for sending sms pattern from ippanel service provider:
 ```php
-$sms = new SMS();
+$apiKey = '<YOUR_API_KEY>';
+$sms = new SMS($apiKey);
 $response = $sms->driver('ippanel')
     ->pattern('<YOUR_PATTERN_CODE>')
     ->data('<ARRAY_OF_PATTERN_VALUES>')
     ->from('<SERVICE_PROVIDER_NUMBER>')
     ->to('<ARRAY_OF_PHONE_NUMBERS>')
-    ->credential    ([
-        'username' => '<YOUR_USERNAME>',
-        'password' => '<YOUR_PASSWORD>'
-    ])
     ->send();
 ```
 
@@ -139,9 +129,15 @@ use Sms\Driver;
 
 class MyDrive extends Driver implements IDriver
 {
-    const NORMAL_URL = '';
-
-    const PATTERN_URL = '';
+    const BASE_URL = '';
+    
+    /**
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->client = new Http(self::BASE_URL, 30, []);
+    }
     
     /**
      * @return bool|mixed|string
@@ -158,6 +154,14 @@ class MyDrive extends Driver implements IDriver
     public function message($text)
     {
         // TODO: Implement send message code for current service provider
+    }
+    
+    /**
+     * @return void
+     */
+    public function setCredential()
+    {
+        // TODO: Implement set credential code for current service provider
     }
 }
 ```
