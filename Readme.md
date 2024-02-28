@@ -59,7 +59,6 @@ available methods:
 - `to`: set array of numbers receivers
 - `from`: set sender number
 - `send`: send your sms and return response as json or plain string
-- `credential`: set sms service provider credentials e.g: `token`, `username`, `password` or somethings else.
 
 ### Methods with Parameters
 
